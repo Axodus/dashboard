@@ -1,0 +1,105 @@
+bb_length: 44
+bb_long_threshold: -0.07000000000000006
+bb_short_threshold: 1.9300000000000002
+bb_std: 2.165
+candles_config:
+- connector: binance_perpetual
+  interval: 1m
+  max_records: 100000
+  trading_pair: BTCUSDT
+close_price_trading_pair: _
+exchange: binance_perpetual
+leverage: 100
+order_levels:
+- cooldown_time: 15
+  level: 0
+  order_amount_usd:
+    __decimal__: true
+    value: '5'
+  order_refresh_time: 60
+  side:
+    __enum__: true
+    class: TradeType
+    value: BUY
+  spread_factor:
+    __decimal__: true
+    value: '0.0'
+  triple_barrier_conf:
+    open_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    stop_loss:
+      __decimal__: true
+      value: '0.70000000000000006661338147750939242541790008544921875'
+    stop_loss_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    take_profit:
+      __decimal__: true
+      value: '2.149999999999999911182158029987476766109466552734375'
+    take_profit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    time_limit: 74518
+    time_limit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    trailing_stop_activation_price_delta:
+      __decimal__: true
+      value: '0.008000000000000000166533453693773481063544750213623046875'
+    trailing_stop_trailing_delta:
+      __decimal__: true
+      value: '0.59999999999999997779553950749686919152736663818359375'
+- cooldown_time: 15
+  level: 0
+  order_amount_usd:
+    __decimal__: true
+    value: '5'
+  order_refresh_time: 60
+  side:
+    __enum__: true
+    class: TradeType
+    value: SELL
+  spread_factor:
+    __decimal__: true
+    value: '0.0'
+  triple_barrier_conf:
+    open_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    stop_loss:
+      __decimal__: true
+      value: '0.70000000000000006661338147750939242541790008544921875'
+    stop_loss_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    take_profit:
+      __decimal__: true
+      value: '2.149999999999999911182158029987476766109466552734375'
+    take_profit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    time_limit: 74518
+    time_limit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    trailing_stop_activation_price_delta:
+      __decimal__: true
+      value: '0.008000000000000000166533453693773481063544750213623046875'
+    trailing_stop_trailing_delta:
+      __decimal__: true
+      value: '0.59999999999999997779553950749686919152736663818359375'
+position_mode:
+  __enum__: true
+  class: PositionMode
+  value: HEDGE
+strategy_name: bollinger_v1
+trading_pair: BTCUSDT

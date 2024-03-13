@@ -1,0 +1,106 @@
+bb_length: 50
+bb_long_threshold: -0.17999999999999994
+bb_short_threshold: 0.97
+bb_std: 2.41
+candles_config:
+- connector: binance_perpetual
+  interval: 5m
+  max_records: 1000000
+  trading_pair: arbusdt
+close_price_trading_pair: _
+exchange: binance_perpetual
+leverage: 50
+order_levels:
+- cooldown_time: 15
+  level: 0
+  order_amount_usd:
+    __decimal__: true
+    value: '10'
+  order_refresh_time: 60
+  side:
+    __enum__: true
+    class: TradeType
+    value: BUY
+  spread_factor:
+    __decimal__: true
+    value: '0.0'
+  triple_barrier_conf:
+    open_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    stop_loss:
+      __decimal__: true
+      value: '0.14000000000000001332267629550187848508358001708984375'
+    stop_loss_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    take_profit:
+      __decimal__: true
+      value: '2.7599999999999997868371792719699442386627197265625'
+    take_profit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    time_limit: 71846
+    time_limit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    trailing_stop_activation_price_delta:
+      __decimal__: true
+      value: '0'
+    trailing_stop_trailing_delta:
+      __decimal__: true
+      value: '1'
+- cooldown_time: 15
+  level: 0
+  order_amount_usd:
+    __decimal__: true
+    value: '10'
+  order_refresh_time: 60
+  side:
+    __enum__: true
+    class: TradeType
+    value: SELL
+  spread_factor:
+    __decimal__: true
+    value: '0.0'
+  triple_barrier_conf:
+    open_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    stop_loss:
+      __decimal__: true
+      value: '0.14000000000000001332267629550187848508358001708984375'
+    stop_loss_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    take_profit:
+      __decimal__: true
+      value: '2.7599999999999997868371792719699442386627197265625'
+    take_profit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    time_limit: 71846
+    time_limit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    trailing_stop_activation_price_delta:
+      __decimal__: true
+      value: '0'
+    trailing_stop_trailing_delta:
+      __decimal__: true
+      value: '1'
+position_mode:
+  __enum__: true
+  class: PositionMode
+  value: HEDGE
+rsi_length: 5
+strategy_name: whiterabbit
+trading_pair: arbusdt

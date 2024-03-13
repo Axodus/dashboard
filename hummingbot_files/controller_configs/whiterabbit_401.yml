@@ -1,0 +1,106 @@
+bb_length: 79
+bb_long_threshold: -0.1299999999999999
+bb_short_threshold: 1.81
+bb_std: 2.15
+candles_config:
+- connector: binance_perpetual
+  interval: 1m
+  max_records: 1000000
+  trading_pair: DOGEUSDT
+close_price_trading_pair: _
+exchange: binance_perpetual
+leverage: 49
+order_levels:
+- cooldown_time: 15
+  level: 0
+  order_amount_usd:
+    __decimal__: true
+    value: '10'
+  order_refresh_time: 60
+  side:
+    __enum__: true
+    class: TradeType
+    value: BUY
+  spread_factor:
+    __decimal__: true
+    value: '0.0'
+  triple_barrier_conf:
+    open_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    stop_loss:
+      __decimal__: true
+      value: '0.93000000000000004884981308350688777863979339599609375'
+    stop_loss_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    take_profit:
+      __decimal__: true
+      value: '1.8200000000000000621724893790087662637233734130859375'
+    take_profit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    time_limit: 60386
+    time_limit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    trailing_stop_activation_price_delta:
+      __decimal__: true
+      value: '0'
+    trailing_stop_trailing_delta:
+      __decimal__: true
+      value: '1'
+- cooldown_time: 15
+  level: 0
+  order_amount_usd:
+    __decimal__: true
+    value: '10'
+  order_refresh_time: 60
+  side:
+    __enum__: true
+    class: TradeType
+    value: SELL
+  spread_factor:
+    __decimal__: true
+    value: '0.0'
+  triple_barrier_conf:
+    open_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    stop_loss:
+      __decimal__: true
+      value: '0.93000000000000004884981308350688777863979339599609375'
+    stop_loss_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    take_profit:
+      __decimal__: true
+      value: '1.8200000000000000621724893790087662637233734130859375'
+    take_profit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    time_limit: 60386
+    time_limit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    trailing_stop_activation_price_delta:
+      __decimal__: true
+      value: '0'
+    trailing_stop_trailing_delta:
+      __decimal__: true
+      value: '1'
+position_mode:
+  __enum__: true
+  class: PositionMode
+  value: HEDGE
+rsi_length: 5
+strategy_name: whiterabbit
+trading_pair: DOGEUSDT

@@ -1,0 +1,108 @@
+bb_length: 169
+bb_long_threshold: 0.1200000000000001
+bb_short_threshold: 1.31
+bb_std: 2.41
+candles_config:
+- connector: binance_perpetual
+  interval: 3m
+  max_records: 1000000
+  trading_pair: DOGEUSDT
+close_price_trading_pair: _
+exchange: binance_perpetual
+leverage: 10
+macd_fast: 17
+macd_signal: 10
+macd_slow: 68
+order_levels:
+- cooldown_time: 15
+  level: 0
+  order_amount_usd:
+    __decimal__: true
+    value: '50'
+  order_refresh_time: 60
+  side:
+    __enum__: true
+    class: TradeType
+    value: BUY
+  spread_factor:
+    __decimal__: true
+    value: '0.0'
+  triple_barrier_conf:
+    open_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    stop_loss:
+      __decimal__: true
+      value: '0.0200000000000000004163336342344337026588618755340576171875'
+    stop_loss_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    take_profit:
+      __decimal__: true
+      value: '0.299999999999999988897769753748434595763683319091796875'
+    take_profit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    time_limit: 69238
+    time_limit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    trailing_stop_activation_price_delta:
+      __decimal__: true
+      value: '0.008000000000000000166533453693773481063544750213623046875'
+    trailing_stop_trailing_delta:
+      __decimal__: true
+      value: '0.7399999999999999911182158029987476766109466552734375'
+- cooldown_time: 15
+  level: 0
+  order_amount_usd:
+    __decimal__: true
+    value: '50'
+  order_refresh_time: 60
+  side:
+    __enum__: true
+    class: TradeType
+    value: SELL
+  spread_factor:
+    __decimal__: true
+    value: '0.0'
+  triple_barrier_conf:
+    open_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    stop_loss:
+      __decimal__: true
+      value: '0.0200000000000000004163336342344337026588618755340576171875'
+    stop_loss_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    take_profit:
+      __decimal__: true
+      value: '0.299999999999999988897769753748434595763683319091796875'
+    take_profit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    time_limit: 69238
+    time_limit_order_type:
+      __enum__: true
+      class: OrderType
+      value: MARKET
+    trailing_stop_activation_price_delta:
+      __decimal__: true
+      value: '0.008000000000000000166533453693773481063544750213623046875'
+    trailing_stop_trailing_delta:
+      __decimal__: true
+      value: '0.7399999999999999911182158029987476766109466552734375'
+position_mode:
+  __enum__: true
+  class: PositionMode
+  value: HEDGE
+strategy_name: macd_bb_v1
+trading_pair: DOGEUSDT
