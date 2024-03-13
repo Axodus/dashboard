@@ -3,8 +3,8 @@ import os
 import importlib.util
 
 from hummingbot.core.data_type.common import OrderType, PositionMode, TradeType, PositionSide, PositionAction
-from hummingbot.smart_components.strategy_frameworks.data_types import (
-    ExecutorHandlerStatus,
+from hummingbot.smart_components.executors.position_executor.data_types import (
+    PositionExecutorStatus,
 )
 from hummingbot.smart_components.strategy_frameworks.directional_trading import DirectionalTradingControllerBase, \
     DirectionalTradingControllerConfigBase, DirectionalTradingExecutorHandler
@@ -33,7 +33,7 @@ def load_controllers(path):
 def initialize_controller_from_config(encoder_decoder: ConfigEncoderDecoder,
                                       all_controllers_info: dict,
                                       controller_config_file: str):
-    config = encoder_decoder.yaml_load(f"conf/controllers_config/{controller_config_file}")
+    config = encoder_decoder.yaml_load(f"controllers_configs/{controller_config_file}")
     controller_info = all_controllers_info[config["strategy_name"]]
     config_instance = controller_info["config"](**config)
     controller_class = controller_info["class"](config_instance)
@@ -96,7 +96,7 @@ class StrategyV2Launcher(ScriptStrategyBase):
         market conditions, you can orchestrate from this script when to stop or start them.
         """
         for executor_handler in self.executor_handlers.values():
-            if executor_handler.status == ExecutorHandlerStatus.NOT_STARTED:
+            if executor_handler.status == PositionExecutorStatus.NOT_STARTED:
                 executor_handler.start()
 
     def format_status(self) -> str:
