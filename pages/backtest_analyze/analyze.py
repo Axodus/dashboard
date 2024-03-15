@@ -186,15 +186,15 @@ else:
     col1, col2, col3, col4 = st.columns([1, 1, 1, 0.5])
     with col1:
         trade_cost = st.number_input("Trade cost",
-                                     value=0.0006,
+                                     value=0.06,
                                      min_value=0.0001, format="%.4f", )
     with col2:
         initial_portfolio_usd = st.number_input("Initial portfolio usd",
-                                                value=10000.00,
+                                                value=100.00,
                                                 min_value=1.00,
                                                 max_value=999999999.99)
     with col3:
-        start = st.text_input("Start", value="2023-01-01")
+        start = st.text_input("Start", value="2024-01-01")
         end = st.text_input("End", value="2024-01-01")
     c1, c2 = st.columns([1, 1])
     with col4:

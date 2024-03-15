@@ -18,9 +18,9 @@ docker_manager = DockerManager()
 c1, c2, c3 = st.columns([2, 2, 0.5])
 with c1:
     exchange = st.selectbox("Exchange", ["binance_perpetual", "binance"], index=0)
-    trading_pairs = st.text_input("Trading Pairs (separated with commas)", value="BTC-USDT,ETH-USDT")
+    trading_pairs = st.text_input("Trading Pairs (separated with commas)", value="BTCUSDT,ETHUSDT")
 with c2:
-    intervals = st.multiselect("Intervals", options=["1s", "1m", "3m", "5m", "15m", "1h", "4h", "1d"], default=["1m", "3m", "1h"])
+    intervals = st.multiselect("Intervals", options=["1s", "1m", "3m", "5m", "15m", "1h", "4h", "1d"], default=["1m", "3m", "5m", "15m"])
     days_to_download = st.number_input("Days to Download", value=30, min_value=1, max_value=365, step=1)
 with c3:
     get_data_button = st.button("Download Candles!")

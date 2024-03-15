@@ -6,9 +6,9 @@ MINER_EXCHANGES = ["Binance", "FTX", "Coinbase Exchange", "Huobi Global", "OKX",
                    "MEXC Global", "Gate.io", "BitMart", "Bitfinex", "AscendEX (BitMax)",
                    "Bittrex", "CoinFLEX", "Digifinex", "HitBTC", "Kraken", "Liquid", ]
 
-DEFAULT_MINER_COINS = ["Avalanche"]
+DEFAULT_MINER_COINS = ["Avalanche","Harmony","Algorand"]
 
 CERTIFIED_EXCHANGES = ["ascendex", "binance", "bybit", "gate.io", "hitbtc", "huobi", "kucoin", "okx", "gateway"]
 CERTIFIED_STRATEGIES = ["xemm", "cross exchange market making", "pmm", "pure market making"]
 
-AUTH_SYSTEM_ENABLED = True
+AUTH_SYSTEM_ENABLED = False
