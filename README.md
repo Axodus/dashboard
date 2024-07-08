@@ -49,7 +49,7 @@ Currently, Dashboard should be installed from source via the process below. In t
 
 4. **Activate the Isolated 'conda' Environment**:
     ```bash
-    conda activate dashboard
+    conda activate backtest
     ```
 
 5. **Start the Dashboard**:
