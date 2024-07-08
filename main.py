@@ -23,6 +23,7 @@ def main_page():
             Page("frontend/pages/config/dman_maker_v2/app.py", "D-Man Maker V2", "🤖"),
             Page("frontend/pages/config/bollinger_v1/app.py", "Bollinger V1", "📈"),
             Page("frontend/pages/config/macd_bb_v1/app.py", "MACD_BB V1", "📊"),
+            Page("frontend/pages/config/rsi_bb_v1/app.py", "RSI_BB V1", "📊"),
             Page("frontend/pages/config/supertrend_v1/app.py", "SuperTrend V1", "👨‍🔬"),
             Page("frontend/pages/config/xemm_controller/app.py", "XEMM Controller", "⚡️"),
             # Page("frontend/pages/config/position_builder/app.py", "Position Builder", "🔭"),

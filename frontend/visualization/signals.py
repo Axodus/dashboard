@@ -2,7 +2,6 @@ from frontend.visualization import theme
 import plotly.graph_objects as go
 import pandas_ta as ta  # noqa: F401
 
-
 def get_signal_traces(buy_signals, sell_signals):
     tech_colors = theme.get_color_scheme()
     traces = [
@@ -26,9 +25,7 @@ def get_bollinger_v1_signal_traces(df, bb_length, bb_std, bb_long_threshold, bb_
 
     return get_signal_traces(buy_signals, sell_signals)
 
-
-def get_macdbb_v1_signal_traces(df, bb_length, bb_std, bb_long_threshold, bb_short_threshold, macd_fast, macd_slow,
-                                macd_signal):
+def get_macdbb_v1_signal_traces(df, bb_length, bb_std, bb_long_threshold, bb_short_threshold, macd_fast, macd_slow, macd_signal):
     tech_colors = theme.get_color_scheme()
     # Add Bollinger Bands
     df.ta.bbands(length=bb_length, std=bb_std, append=True)
@@ -44,6 +41,20 @@ def get_macdbb_v1_signal_traces(df, bb_length, bb_std, bb_long_threshold, bb_sho
 
     return get_signal_traces(buy_signals, sell_signals)
 
+def get_rsibb_v1_signal_traces(df, bb_length, bb_std, bb_long_threshold, bb_short_threshold, rsi_period, rsi_overbought, rsi_oversold):
+    tech_colors = theme.get_color_scheme()
+    # Add Bollinger Bands
+    df.ta.bbands(length=bb_length, std=bb_std, append=True)
+    # Add RSI
+    df.ta.rsi(length=rsi_period, append=True)
+    # Decision Logic
+    bbp = df[f"BBP_{bb_length}_{bb_std}"]
+    rsi = df[f"RSI_{rsi_period}"]
+
+    buy_signals = df[(bbp < bb_long_threshold) & (rsi < rsi_oversold)]
+    sell_signals = df[(bbp > bb_short_threshold) & (rsi > rsi_overbought)]
+
+    return get_signal_traces(buy_signals, sell_signals)
 
 def get_supertrend_v1_signal_traces(df, length, multiplier, percentage_threshold):
     # Add indicators

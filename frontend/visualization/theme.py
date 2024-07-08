@@ -15,7 +15,6 @@ def get_default_layout(title=None, height=800, width=1800):
         layout["title"] = title
     return layout
 
-
 def get_color_scheme():
     return {
         'upper_band': '#4682B4',
@@ -38,4 +37,7 @@ def get_color_scheme():
         'cum_unrealized_pnl': '#FFA07A',  # Light Salmon
         'volume': '#FFD700',  # Gold
         'price': '#00008B',  # Dark Blue
+        'rsi_line': '#1E90FF',  # Dodger Blue for RSI line
+        'rsi_overbought': '#FF6347',  # Tomato Red for RSI overbought level
+        'rsi_oversold': '#32CD32',  # Green for RSI oversold level
     }

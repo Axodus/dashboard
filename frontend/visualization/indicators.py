@@ -4,7 +4,6 @@ import plotly.graph_objects as go
 
 from frontend.visualization import theme
 
-
 def get_bbands_traces(df, bb_length, bb_std):
     tech_colors = theme.get_color_scheme()
     df.ta.bbands(length=bb_length, std=bb_std, append=True)
@@ -20,7 +19,6 @@ def get_bbands_traces(df, bb_length, bb_std):
                    name='Lower Band'),
     ]
     return traces
-
 
 def get_volume_trace(df):
     df.index = pd.to_datetime(df.timestamp, unit='s')
@@ -42,6 +40,19 @@ def get_macd_traces(df, macd_fast, macd_slow, macd_signal):
     ]
     return traces
 
+def get_rsi_traces(df, rsi_period, rsi_overbought, rsi_oversold):
+    tech_colors = theme.get_color_scheme()
+    df.ta.rsi(length=rsi_period, append=True)
+    rsi = f'RSI_{rsi_period}'
+    traces = [
+        go.Scatter(x=df.index, y=df[rsi], line=dict(color=tech_colors['rsi_line']),
+                   name='RSI'),
+        go.Scatter(x=df.index, y=[rsi_overbought] * len(df), line=dict(color=tech_colors['rsi_overbought'], dash='dash'),
+                   name='Overbought'),
+        go.Scatter(x=df.index, y=[rsi_oversold] * len(df), line=dict(color=tech_colors['rsi_oversold'], dash='dash'),
+                   name='Oversold')
+    ]
+    return traces
 
 def get_supertrend_traces(df, length, multiplier):
     tech_colors = theme.get_color_scheme()
@@ -79,4 +90,3 @@ def get_supertrend_traces(df, length, multiplier):
     ]
 
     return traces
-
