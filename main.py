@@ -29,9 +29,12 @@ def main_page():
             # Page("frontend/pages/config/position_builder/app.py", "Position Builder", "🔭"),
             Section("Data", "💾"),
             Page("frontend/pages/data/download_candles/app.py", "Download Candles", "💹"),
-            # Page("pages/create/create.py", "Create", "⚔️"),
-            # Page("pages/optimize/optimize.py", "Optimize", "🧪"),
-            # Page("pages/analyze/analyze.py", "Analyze", "🔬"),
+            
+            Section("Backtesting Strategies", "👨‍👩‍👧‍👦"),
+            Page("frontend/pages/backtesting/create/create.py", "Create", "⚔️"),
+            Page("frontend/pages/backtesting/optimize/optimize.py", "Optimize", "🧪"),
+            Page("frontend/pages/backtesting/analyze/analyze.py", "Analyze", "🔬"),
+            
             Section("Community Pages", "👨‍👩‍👧‍👦"),
             # Page("frontend/pages/performance/strategy_performance/app.py", "Strategy Performance", "🚀"),
             Page("frontend/pages/data/token_spreads/app.py", "Token Spreads", "🧙"),
