@@ -7,7 +7,7 @@ run:
 	streamlit run main.py
 
 uninstall:
-	conda env remove -n dashboard
+	conda env remove -n backtest
 
 install:
 	conda env create -f environment_conda.yml
