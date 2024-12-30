@@ -12,6 +12,7 @@ def public_pages():
         Page("frontend/pages/config/pmm_simple/app.py", "PMM Simple", "👨‍🏫"),
         Page("frontend/pages/config/pmm_dynamic/app.py", "PMM Dynamic", "👩‍🏫"),
         Page("frontend/pages/config/dman_maker_v2/app.py", "D-Man Maker V2", "🤖"),
+        Page("frontend/pages/config/whiterabbit_v1/app.py", "White Rabbit v1", "🤖"),
         Page("frontend/pages/config/bollinger_v1/app.py", "Bollinger V1", "📈"),
         Page("frontend/pages/config/macd_bb_v1/app.py", "MACD_BB V1", "📊"),
         Page("frontend/pages/config/supertrend_v1/app.py", "SuperTrend V1", "👨‍🔬"),

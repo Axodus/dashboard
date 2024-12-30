@@ -82,3 +82,28 @@ def get_supertrend_traces(df, length, multiplier):
     ]
 
     return traces
+
+# Function to get RSI traces
+def get_rsi_traces(df, rsi_length, rsi_oversold, rsi_overbought):
+    # Validate inputs
+    if df.empty:
+        raise ValueError("Input DataFrame is empty. Cannot calculate RSI.")
+    if len(df) < rsi_length:
+        raise ValueError(f"Not enough data points. Requires at least {rsi_length} rows.")
+    
+    # Ensure color scheme exists
+    tech_colors = theme.get_color_scheme() if theme else {'rsi_line': '#034efc'}
+
+    # Calculate RSI and validate column existence
+    df.ta.rsi(length=rsi_length, append=True)
+    rsi_column = f"RSI_{rsi_length}"
+    if rsi_column not in df.columns:
+        raise ValueError(f"RSI column {rsi_column} not found in DataFrame. Ensure RSI is calculated correctly.")
+
+    # Generate traces
+    traces = [
+        go.Scatter(x=df.index, y=df[rsi_column], line=dict(color=tech_colors['rsi_line']), name='RSI'),
+        go.Scatter(x=df.index, y=[rsi_oversold] * len(df), line=dict(color='green', dash='dash'), name='RSI Oversold'),
+        go.Scatter(x=df.index, y=[rsi_overbought] * len(df), line=dict(color='red', dash='dash'), name='RSI Overbought')
+    ]
+    return traces

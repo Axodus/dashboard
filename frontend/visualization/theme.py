@@ -37,5 +37,7 @@ def get_color_scheme():
         'stop_loss': '#FF0000',  # Red
         'cum_unrealized_pnl': '#FFA07A',  # Light Salmon
         'volume': '#FFD700',  # Gold
+        'vol_ma': '#FFFFFF', # White
         'price': '#00008B',  # Dark Blue
+        'rsi_line': '#034efc', # Blue
     }

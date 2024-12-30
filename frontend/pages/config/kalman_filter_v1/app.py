@@ -56,8 +56,8 @@ with c1:
     connector_name = st.text_input("Connector Name", value="binance_perpetual")
     candles_connector = st.text_input("Candles Connector", value="binance_perpetual")
 with c2:
-    trading_pair = st.text_input("Trading Pair", value="WLD-USDT")
-    candles_trading_pair = st.text_input("Candles Trading Pair", value="WLD-USDT")
+    trading_pair = st.text_input("Trading Pair", value="BNB-USDT")
+    candles_trading_pair = st.text_input("Candles Trading Pair", value="BNB-USDT")
 with c3:
     interval = st.selectbox("Candle Interval", options=["1m", "3m", "5m", "15m", "30m"], index=1)
 with c4:

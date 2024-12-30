@@ -5,15 +5,15 @@ def get_directional_trading_general_inputs():
     with st.expander("General Settings", expanded=True):
         c1, c2, c3, c4, c5, c6, c7 = st.columns(7)
         default_config = st.session_state.get("default_config", {})
-        connector_name = default_config.get("connector_name", "kucoin")
-        trading_pair = default_config.get("trading_pair", "WLD-USDT")
+        connector_name = default_config.get("connector_name", "binance_perpetual")
+        trading_pair = default_config.get("trading_pair", "BNB-USDT")
         leverage = default_config.get("leverage", 20)
         total_amount_quote = default_config.get("total_amount_quote", 1000)
         max_executors_per_side = default_config.get("max_executors_per_side", 5)
         cooldown_time = default_config.get("cooldown_time", 60 * 60) / 60
         position_mode = 0 if default_config.get("position_mode", "HEDGE") == "HEDGE" else 1
-        candles_connector_name = default_config.get("candles_connector_name", "kucoin")
-        candles_trading_pair = default_config.get("candles_trading_pair", "WLD-USDT")
+        candles_connector_name = default_config.get("candles_connector_name", "binance_perpetual")
+        candles_trading_pair = default_config.get("candles_trading_pair", "BNB-USDT")
         interval = default_config.get("interval", "3m")
         intervals = ["1m", "3m", "5m", "15m", "1h", "4h", "1d", "1s"]
         interval_index = intervals.index(interval)
@@ -26,9 +26,9 @@ def get_directional_trading_general_inputs():
                                                         " (e.g., binance_perpetual).")
         with c2:
             trading_pair = st.text_input("Trading Pair", value=trading_pair,
-                                         help="Enter the trading pair to trade on (e.g., WLD-USDT).")
+                                         help="Enter the trading pair to trade on (e.g., BNB-USDT).")
             candles_trading_pair = st.text_input("Candles Trading Pair", value=candles_trading_pair,
-                                                 help="Enter the trading pair to get candles for (e.g., WLD-USDT).")
+                                                 help="Enter the trading pair to get candles for (e.g., BNB-USDT).")
         with c3:
             leverage = st.number_input("Leverage", value=leverage,
                                        help="Set the leverage to use for trading (e.g., 20 for 20x leverage)."

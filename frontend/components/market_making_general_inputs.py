@@ -5,8 +5,8 @@ def get_market_making_general_inputs(custom_candles=False):
     with st.expander("General Settings", expanded=True):
         c1, c2, c3, c4, c5, c6, c7 = st.columns(7)
         default_config = st.session_state.get("default_config", {})
-        connector_name = default_config.get("connector_name", "kucoin")
-        trading_pair = default_config.get("trading_pair", "WLD-USDT")
+        connector_name = default_config.get("connector_name", "binance_perpetual")
+        trading_pair = default_config.get("trading_pair", "BNB-USDT")
         leverage = default_config.get("leverage", 20)
         total_amount_quote = default_config.get("total_amount_quote", 1000)
         position_mode = 0 if default_config.get("position_mode", "HEDGE") == "HEDGE" else 1
@@ -20,7 +20,7 @@ def get_market_making_general_inputs(custom_candles=False):
                                            help="Enter the name of the exchange to trade on (e.g., binance_perpetual).")
         with c2:
             trading_pair = st.text_input("Trading Pair", value=trading_pair,
-                                         help="Enter the trading pair to trade on (e.g., WLD-USDT).")
+                                         help="Enter the trading pair to trade on (e.g., BNB-USDT).")
         with c3:
             leverage = st.number_input("Leverage", value=leverage,
                                        help="Set the leverage to use for trading (e.g., 20 for 20x leverage). "
@@ -40,8 +40,8 @@ def get_market_making_general_inputs(custom_candles=False):
             executor_refresh_time = st.number_input("Executor Refresh Time (minutes)", value=executor_refresh_time,
                                                     help="Enter the refresh time in minutes for executors (e.g., 60).") * 60
         if custom_candles:
-            candles_connector = default_config.get("candles_connector", "kucoin")
-            candles_trading_pair = default_config.get("candles_trading_pair", "WLD-USDT")
+            candles_connector = default_config.get("candles_connector", "binance_perpetual")
+            candles_trading_pair = default_config.get("candles_trading_pair", "BNB-USDT")
             interval = default_config.get("interval", "3m")
             intervals = ["1m", "3m", "5m", "15m", "1h", "4h", "1d"]
             interval_index = intervals.index(interval)
@@ -51,7 +51,7 @@ def get_market_making_general_inputs(custom_candles=False):
                                                        "(e.g., binance_perpetual).")
             with c2:
                 candles_trading_pair = st.text_input("Candles Trading Pair", value=candles_trading_pair,
-                                                     help="Enter the trading pair to get candles for (e.g., WLD-USDT).")
+                                                     help="Enter the trading pair to get candles for (e.g., BNB-USDT).")
             with c3:
                 interval = st.selectbox("Candles Interval", intervals, index=interval_index,
                                         help="Enter the interval for candles (e.g., 1m).")
