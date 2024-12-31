@@ -40,9 +40,12 @@ fig = make_subplots(rows=2, cols=1, shared_xaxes=True,
 
 add_traces_to_fig(fig, [get_candlestick_trace(candles)], row=1, col=1)
 add_traces_to_fig(fig, get_bbands_traces(candles, inputs["bb_length"], inputs["bb_std"]), row=1, col=1)
-add_traces_to_fig(fig, get_bollinger_v1_signal_traces(candles, inputs["bb_length"], inputs["bb_std"],
-                                                      inputs["bb_long_threshold"], inputs["bb_short_threshold"]), row=1,
-                  col=1)
+add_traces_to_fig(fig, get_bollinger_v1_signal_traces(
+    candles, 
+    inputs["bb_length"], 
+    inputs["bb_std"],
+    inputs["bb_long_threshold"], 
+    inputs["bb_short_threshold"]), row=1,col=1)
 add_traces_to_fig(fig, [get_volume_trace(candles)], row=2, col=1)
 
 fig.update_layout(**theme.get_default_layout())

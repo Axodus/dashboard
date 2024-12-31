@@ -31,8 +31,11 @@ st.write("### Visualizing WhiteRabbit Signals")
 days_to_visualize = st.number_input("Days to Visualize", min_value=1, max_value=365, value=7)
 
 # Load candle data
-candles = get_candles(connector_name=inputs["candles_connector"], trading_pair=inputs["candles_trading_pair"],
-                      interval=inputs["interval"], days=days_to_visualize)
+candles = get_candles(
+    connector_name=inputs["candles_connector"], 
+    trading_pair=inputs["candles_trading_pair"],
+    interval=inputs["interval"], 
+    days=days_to_visualize)
 
 # Create a subplot with 3 rows
 fig = make_subplots(rows=3, cols=1, shared_xaxes=True,

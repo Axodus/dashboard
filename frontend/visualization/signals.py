@@ -24,14 +24,14 @@ def get_whiterabbit_signal_traces(df, bb_length, bb_std, bb_long_threshold, bb_s
 
     # Add Bollinger Bands and RSI indicators
     df.ta.bbands(length=bb_length, std=bb_std, append=True)
-    df.ta.rsi(length=rsi_length, append=True)
+    df.ta.rsi(length=rsi_length, overbought=rsi_overbought, oversold=rsi_oversold, append=True)
 
     # Extract indicator values
     bbp = df[f"BBP_{bb_length}_{bb_std}"]
     rsi = df[f"RSI_{rsi_length}"] # alternatively _{rsi_overbought}_{rsi_oversold}
 
     # Generate normal buy and sell signals
-    buy_signals = df[(bbp < bb_long_threshold) & (rsi > rsi_oversold)]
+    buy_signals = df[(bbp < bb_long_threshold) & (rsi < rsi_oversold)]
     sell_signals = df[(bbp > bb_short_threshold) & (rsi > rsi_overbought)]
 
     # Return signal traces

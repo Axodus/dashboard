@@ -38,15 +38,15 @@ def user_inputs():
     with st.expander("RSI Configuration", expanded=True):
         c1, c2, c3 = st.columns(3)
         with c1:
-            rsi_length = st.number_input("RSI Length", min_value=5, max_value=100, value=14)
+            rsi_length = st.number_input("RSI Length", min_value=2, max_value=50, value=3)
         with c2:
-            rsi_oversold = st.number_input("RSI Oversold Level", min_value=10, max_value=50, value=20)
+            rsi_oversold = st.number_input("RSI Oversold Level", min_value=1, max_value=50, value=10)
         with c3:
-            rsi_overbought = st.number_input("RSI Overbought Level", min_value=50, max_value=90, value=80)
+            rsi_overbought = st.number_input("RSI Overbought Level", min_value=50, max_value=99, value=95)
        
     # Volume Input Section
-    with st.expander("Volume Configuration", expanded=True):
-        vol_ma = st.number_input("Volume Moving Average Length", min_value=5, max_value=100, value=21)
+    #with st.expander("Volume Configuration", expanded=True):
+    #    vol_ma = st.number_input("Volume Moving Average Length", min_value=5, max_value=100, value=21)
 
     # Return all the collected configuration values in a dictionary format
     return {
@@ -69,7 +69,6 @@ def user_inputs():
         "rsi_length": rsi_length,
         "rsi_oversold": rsi_oversold,
         "rsi_overbought": rsi_overbought,
-        "vol_ma": vol_ma,
         "stop_loss": sl,
         "take_profit": tp,
         "time_limit": time_limit,
