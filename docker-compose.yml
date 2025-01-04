@@ -1,7 +1,7 @@
 services:
   dashboard:
     container_name: dashboard
-    image: hummingbot/dashboard:latest
+    image: mzfshark/dashboard:dev
     ports:
       - "8501:8501"
     environment:
