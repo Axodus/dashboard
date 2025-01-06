@@ -5,8 +5,8 @@ from streamlit_elements import elements, mui
 
 from frontend.components.controllers_file_explorer import ControllersFileExplorer
 from frontend.components.dashboard import Dashboard
-from frontend.components.directional_strategy_creation_card import DirectionalStrategyCreationCard
 from frontend.components.editor import Editor
+from frontend.components.optimization_creation_card import OptimizationCreationCard
 from frontend.st_utils import initialize_st_page
 
 initialize_st_page(title="Create", icon="️⚔️")
@@ -20,7 +20,7 @@ if "ds_board" not in st.session_state:
     board = Dashboard()
     ds_board = SimpleNamespace(
         dashboard=board,
-        create_strategy_card=DirectionalStrategyCreationCard(board, 0, 0, 12, 1),
+        create_strategy_card=OptimizationCreationCard(board, 0, 0, 12, 1),
         file_explorer=ControllersFileExplorer(board, 0, 2, 3, 7),
         editor=Editor(board, 4, 2, 9, 7),
     )

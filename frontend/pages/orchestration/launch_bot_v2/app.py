@@ -11,7 +11,7 @@ CARD_WIDTH = 6
 CARD_HEIGHT = 3
 NUM_CARD_COLS = 2
 
-initialize_st_page(title="Launch Bot", icon="🙌")
+initialize_st_page(title="Launch Bot", icon="🤖")
 
 if "launch_bots_board" not in st.session_state:
     board = Dashboard()
