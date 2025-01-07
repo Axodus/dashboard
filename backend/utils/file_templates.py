@@ -12,7 +12,7 @@ from pydantic import Field
 
 from hummingbot.strategy_v2.executors.position_executor.position_executor import PositionExecutor
 from hummingbot.strategy_v2.strategy_frameworks.data_types import OrderLevel
-from hummingbot.strategy_v2.strategy_frameworks.directional_trading.directional_trading_controller_base import (
+from hummingbot.strategy_v2.controllers.directional_trading_controller_base import (
     DirectionalTradingControllerBase,
     DirectionalTradingControllerConfigBase,
 )
