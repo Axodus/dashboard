@@ -10,3 +10,5 @@
 - sqlalchemy
 - pyyaml
 - optuna
+- optuna-dashboard
+- sqlalchemy.orm

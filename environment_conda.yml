@@ -27,3 +27,6 @@ dependencies:
       - flake8
       - isort
       - pre-commit
+      - optuna
+      - optuna-dashboard
+      - sqlalchemy.orm

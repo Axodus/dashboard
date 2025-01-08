@@ -42,6 +42,6 @@ for tab_name in list(ds_board.editor.tabs.keys()):
 with elements("directional_strategies"):
     with mui.Paper(elevation=3, style={"padding": "2rem"}, spacing=[2, 2], container=True):
         with ds_board.dashboard():
-            ds_board.create_strategy_card.render()
+            ds_board.create_strategy_card()
             ds_board.file_explorer()
             ds_board.editor()
