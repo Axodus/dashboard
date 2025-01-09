@@ -30,8 +30,8 @@ class LaunchStrategyV2(Dashboard.Item):
         self._controller_configs_available = self._backend_api_client.get_all_controllers_config()
         self._controller_config_selected = None
         self._bot_name = None
-        self._image_name = "hummingbot/hummingbot:latest"
-        self._credentials = "master_account"
+        self._image_name = "mzfshark/tradingbot:dev"
+        self._credentials = "mzfshark_account"
         self._max_global_drawdown = None
         self._max_controller_drawdown = None
         self._rebalance_interval = None
@@ -137,7 +137,7 @@ class LaunchStrategyV2(Dashboard.Item):
                     available_images = self._backend_api_client.get_available_images("hummingbot")
                     with mui.FormControl(variant="standard", sx={"width": "100%"}):
                         mui.FormHelperText("Available Images")
-                        with mui.Select(label="Hummingbot Image", defaultValue="hummingbot/hummingbot:latest",
+                        with mui.Select(label="Hummingbot Image", defaultValue="mzfshark/tradingingbot:dev",
                                         variant="standard", onChange=lazy(self._set_image_name)):
                             for image in available_images:
                                 mui.MenuItem(image, value=image)

@@ -101,7 +101,7 @@ class LaunchV2WithControllers:
         with c2:
             available_images = self._backend_api_client.get_available_images("hummingbot")
             self._image_name = st.selectbox("Hummingbot Image", available_images,
-                                            index=available_images.index("hummingbot/hummingbot:latest"))
+                                            index=available_images.index("mzfshark/tradingingbot:dev"))
         with c3:
             available_credentials = self._backend_api_client.get_accounts()
             self._credentials = st.selectbox("Credentials", available_credentials, index=0)
