@@ -1,7 +1,9 @@
+version: "3.3"
 services:
   dashboard:
     container_name: dashboard
-    image: mzfshark/dashboard:dev
+#    image: mzfshark/dashboard:dev
+    build: .
     ports:
       - "8501:8501"
     environment:
@@ -12,3 +14,8 @@ services:
         - BACKEND_API_PASSWORD=admin
     volumes:
       - .:/home/dashboard
+    networks:
+      - emqx-bridge
+networks:
+  emqx-bridge:
+    driver: bridge
