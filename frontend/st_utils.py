@@ -101,11 +101,12 @@ def auth_system():
             )
             show_pages(main_page() + public_pages())
             st.session_state.authenticator.login()
+            st.session_state.authenticator.forgot_password()
             if st.session_state["authentication_status"] is False:
                 st.error('Username/password is incorrect')
             elif st.session_state["authentication_status"] is None:
                 st.warning('Please enter your username and password')
         else:
-            st.session_state.authenticator.logout(location="sidebar")
             st.sidebar.write(f'Welcome *{st.session_state["name"]}*')
+            st.session_state.authenticator.logout(location="sidebar")
             show_pages(main_page() + private_pages() + public_pages())

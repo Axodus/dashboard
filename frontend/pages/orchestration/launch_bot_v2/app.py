@@ -6,11 +6,13 @@ from streamlit_elements import elements, mui
 from frontend.components.dashboard import Dashboard
 from frontend.components.launch_strategy_v2 import LaunchStrategyV2
 from frontend.st_utils import initialize_st_page
+from frontend.visualization.logo import logo
 
 CARD_WIDTH = 6
 CARD_HEIGHT = 3
 NUM_CARD_COLS = 2
 
+logo()
 initialize_st_page(title="Launch Bot", icon="🤖")
 
 if "launch_bots_board" not in st.session_state:

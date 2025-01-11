@@ -4,6 +4,7 @@ services:
     container_name: dashboard
 #    image: mzfshark/dashboard:dev
     build: .
+    restart: unless-stopped
     ports:
       - "8501:8501"
     environment:
@@ -15,7 +16,8 @@ services:
     volumes:
       - .:/home/dashboard
     networks:
-      - emqx-bridge
+      - axodus-network
+
 networks:
-  emqx-bridge:
+  axodus-network:
     driver: bridge

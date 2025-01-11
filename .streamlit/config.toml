@@ -1,6 +1,8 @@
 [theme]
-base="dark"
-font="monospace"
+primaryColor="#3f7479"
+backgroundColor="#050f10"
+secondaryBackgroundColor="#0a1b1c"
+textColor="#5cc6d0"
 [server]
 port=8501
 maxUploadSize = 700

@@ -14,8 +14,10 @@ from frontend.visualization import theme
 from frontend.visualization.backtesting import create_backtesting_figure
 from frontend.visualization.backtesting_metrics import render_accuracy_metrics, render_backtesting_metrics, render_close_types
 from frontend.visualization.candles import get_candlestick_trace
+from frontend.visualization.logo import logo
 from frontend.visualization.utils import add_traces_to_fig
 
+logo()
 # Initialize the Streamlit page
 initialize_st_page(title="Analyzer", icon="", initial_sidebar_state="expanded")
 
@@ -24,6 +26,7 @@ backend_api_client = get_backend_api_client()
 
 st.text("Analyze and backtest trading strategies dynamically.")
 
+
 # Discover configuration modules dynamically
 def discover_config_modules(config_path="frontend/pages/config"):
     config_modules = []
@@ -31,6 +34,7 @@ def discover_config_modules(config_path="frontend/pages/config"):
         if os.path.isdir(os.path.join(config_path, item)) and os.path.isfile(os.path.join(config_path, item, "user_inputs.py")):
             config_modules.append(item)
     return config_modules
+
 
 # Config loader selection
 config_loader_options = discover_config_modules()

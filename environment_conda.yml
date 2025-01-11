@@ -9,7 +9,7 @@ dependencies:
   - pip:
       - hummingbot
       - numpy==1.26.4
-      - streamlit==1.33.0
+      - streamlit==1.41.1
       - watchdog
       - python-dotenv
       - plotly
@@ -21,8 +21,9 @@ dependencies:
       - pyyaml
       - pathlib
       - st_pages
+      - st-pages==0.5.0
       - streamlit-elements==0.1.*
-      - streamlit-authenticator==0.3.2
+      - streamlit-authenticator==0.4.1
       - pydantic==1.10.4
       - flake8
       - isort

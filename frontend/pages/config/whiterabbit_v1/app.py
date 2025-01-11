@@ -5,17 +5,19 @@ from plotly.subplots import make_subplots
 from frontend.components.backtesting import backtesting_section
 from frontend.components.config_loader import get_default_config_loader
 from frontend.components.save_config import render_save_config
-from frontend.pages.config.whiterabbit_v1.user_inputs import user_inputs
 from frontend.pages.config.utils import get_candles
+from frontend.pages.config.whiterabbit_v1.user_inputs import user_inputs
 from frontend.st_utils import get_backend_api_client, initialize_st_page
 from frontend.visualization import theme
 from frontend.visualization.backtesting import create_backtesting_figure
 from frontend.visualization.backtesting_metrics import render_accuracy_metrics, render_backtesting_metrics, render_close_types
 from frontend.visualization.candles import get_candlestick_trace
-from frontend.visualization.indicators import get_bbands_traces, get_volume_trace, get_rsi_traces
+from frontend.visualization.indicators import get_bbands_traces, get_rsi_traces, get_volume_trace
+from frontend.visualization.logo import logo
 from frontend.visualization.signals import get_whiterabbit_signal_traces
 from frontend.visualization.utils import add_traces_to_fig
 
+logo()
 # Initialize the Streamlit page
 initialize_st_page(title="WhiteRabbit V1", icon="🐇", initial_sidebar_state="expanded")
 backend_api_client = get_backend_api_client()
@@ -32,9 +34,9 @@ days_to_visualize = st.number_input("Days to Visualize", min_value=1, max_value=
 
 # Load candle data
 candles = get_candles(
-    connector_name=inputs["candles_connector"], 
+    connector_name=inputs["candles_connector"],
     trading_pair=inputs["candles_trading_pair"],
-    interval=inputs["interval"], 
+    interval=inputs["interval"],
     days=days_to_visualize)
 
 # Create a subplot with 3 rows
@@ -47,7 +49,7 @@ add_traces_to_fig(fig, [get_candlestick_trace(candles)], row=1, col=1)
 add_traces_to_fig(fig, get_bbands_traces(candles, inputs["bb_length"], inputs["bb_std"]), row=1, col=1)
 # Corrected function call with all required arguments
 add_traces_to_fig(fig, get_whiterabbit_signal_traces(
-    candles, 
+    candles,
     inputs["bb_length"],            # Bollinger Bands length
     inputs["bb_std"],               # Bollinger Bands std dev
     inputs["bb_long_threshold"],    # Long threshold for Bollinger Bands
