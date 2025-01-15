@@ -79,4 +79,4 @@ jobs:
           ls -la /usr/share/miniconda/envs
       - name: Run Streamlit Dashboard
         run: |
-          conda run -n dashboard streamlit run main.py --server.headless true || echo "Streamlit execution failed with exit code $?"
+          streamlit run main.py --server.headless true || echo "Streamlit execution failed with exit code $?"
