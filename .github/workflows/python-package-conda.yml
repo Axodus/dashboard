@@ -6,26 +6,59 @@ on:
       - develop
 
 jobs:
-
-  install-dependencies:
-
+  chek-conda:
+    runs-on: self-hosted
+    steps:
+    - uses: actions/checkout@v4
+    - name: check if conda env installed
+      run: |
+        $(shell bash -c 'if [ "${CONDA_EXE} " == " " ]; then \
+            CONDA_EXE=$$((find /opt/conda/bin/conda || find ~/anaconda3/bin/conda || \
+            find /usr/local/anaconda3/bin/conda || find ~/miniconda3/bin/conda || \
+            find /root/miniconda/bin/conda || find ~/Anaconda3/Scripts/conda || \
+            find $$CONDA/bin/conda) 2>/dev/null); fi; \
+            if [ "${CONDA_EXE}_" == "_" ]; then \
+            echo "Please install Anaconda w/ Python 3.10+ first"; \
+            echo "See: https://www.anaconda.com/distribution/"; \
+            exit 1; fi; \
+            echo $$(dirname $${CONDA_EXE})')
+  
+  install:
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      - name: Create or Update Conda Environment
+      - name: Install Environment
         run: |
-          conda env update -f environment_conda.yml -n dashboard --prune
+          if conda env list | grep -q '^dashboard '; then
+            echo "Environment already exists."
+          else
+            conda env create -f environment_conda.yml
+          fi
       - name: List Conda Environments
         run: conda env list
 
   init-conda:
-    needs: install-dependencies
+    needs: install
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
-      - name: Initialize Conda
+      - name: Check and Initialize Conda
         run: |
-          conda init bash
+          # Check if conda is installed
+          if ! command -v conda &> /dev/null; then
+            echo "Conda is not installed. Please install Miniconda or Anaconda."
+            exit 1
+          fi
+  
+          # Check if conda is already initialized in the shell
+          if ! grep -q "conda.sh" ~/.bashrc; then
+            echo "Conda not initialized. Initializing now..."
+            source ~/miniconda3/etc/profile.d/conda.sh
+            conda init bash
+            echo "Conda initialization added to .bashrc. Please restart your shell or run 'source ~/.bashrc' for changes to take effect."
+          else
+            echo "Conda is already initialized."
+          fi
 
   activate-conda:
     needs: [init-conda]
@@ -41,7 +74,7 @@ jobs:
           conda activate dashboard || echo "Failed to activate environment, continuing anyway"
 
   run-dashboard:
-    needs: [activate-conda, install-dependencies]
+    needs: [activate-conda, install]
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
