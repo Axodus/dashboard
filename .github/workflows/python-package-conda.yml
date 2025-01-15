@@ -37,6 +37,8 @@ jobs:
       - name: Install dependencies
         run: |
           conda env update --file environment_conda.yml --name dashboard
+      - name: List Conda Environments
+        run: conda env list
 
   init-conda:
     needs: install-dependencies  # This job initializes Conda, which should happen after dependencies are installed
@@ -66,6 +68,18 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
+      - name: Get Conda Info
+        run: conda info
+      - name: List Conda Environments
+        run: conda env list
+      - name: Debug Conda Environment
+        run: |
+          echo "Conda environments:"
+          conda info --envs
+          echo "Current PATH:"
+          echo $PATH
       - name: Run Streamlit Dashboard
         run: |
-          conda run -n dashboard streamlit run main.py --server.headless true || echo "Streamlit execution failed with exit code $?"
+          # Assuming the correct path is in /usr/share/miniconda/envs/dashboard from `conda env list`
+          conda run -p /usr/share/miniconda/envs/dashboard streamlit run main.py --server.headless true || echo "Streamlit execution failed with exit code $?"
+          
