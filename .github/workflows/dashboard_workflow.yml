@@ -87,7 +87,7 @@ jobs:
           conda info
       - name: Activate Conda environment
         run: |
-          conda activate dashboard || echo "Failed to activate environment, continuing anyway"
+          conda init && conda activate dashboard
 
   run-dashboard:
     needs: [activate-conda, install]
