@@ -9,7 +9,7 @@ on:
 jobs:
   check-conda:
     runs-on: self-hosted
-    environment: development
+    environment: Development
     steps:
       - uses: actions/checkout@v4
       - name: Check if Conda is installed
@@ -57,7 +57,6 @@ jobs:
         run: conda env list
 
   conda-env:
-    needs: install
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
@@ -88,6 +87,7 @@ jobs:
   run-dashboard:
     needs: [conda-env, install]
     runs-on: self-hosted
+    environment: Development
     steps:
       - uses: actions/checkout@v4
       - name: Verify Environment Before Running
