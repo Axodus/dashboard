@@ -91,16 +91,8 @@ jobs:
           source /home/mzfshark/miniconda3/etc/profile.d/conda.sh
           conda activate dashboard
 
-  dependences:
-    runs-on: self-hosted
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install pip dependences
-        run: |
-          pip install -r requirements.txt
-
   run-dashboard:
-    needs: [conda-env, dependences]
+    needs: [conda-env]
     runs-on: self-hosted
     environment: Development
     steps:
