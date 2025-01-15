@@ -4,17 +4,17 @@ on:
   push:
     branches:
       - develop
-    
 
 jobs:
   check-conda:
     runs-on: self-hosted
-    environment: Development
+    outputs:
+      conda_found: ${{ steps.check_conda.outputs.conda_found }}
     steps:
       - uses: actions/checkout@v4
       - name: Check if Conda is installed
+        id: check_conda
         run: |
-          # Array of possible conda installation paths
           CONDA_PATHS=(
             "/opt/conda/bin/conda"
             "~/anaconda3/bin/conda"
@@ -24,7 +24,7 @@ jobs:
             "~/Anaconda3/Scripts/conda"
             "$CONDA/bin/conda"
           )
-  
+
           CONDA_EXE=""
           for path in "${CONDA_PATHS[@]}"; do
             if [ -x "$(eval echo $path)" ]; then
@@ -32,18 +32,22 @@ jobs:
               break
             fi
           done
-  
+
           if [ -z "$CONDA_EXE" ]; then
+            echo "conda_found=false" >> $GITHUB_OUTPUT
             echo "Please install Anaconda or Miniconda with Python 3.10+ first."
             echo "See: https://www.anaconda.com/distribution/"
             exit 1
           else
+            echo "conda_found=true" >> $GITHUB_OUTPUT
             echo "Conda found at: $(dirname $CONDA_EXE)"
           fi
         shell: bash
-  
+
   install:
     runs-on: self-hosted
+    needs: check-conda
+    if: needs.check-conda.outputs.conda_found == 'false'
     steps:
       - uses: actions/checkout@v4
       - name: Install Environment
@@ -58,17 +62,17 @@ jobs:
 
   conda-env:
     runs-on: self-hosted
+    needs: check-conda
+    if: needs.check-conda.outputs.conda_found == 'true'
     steps:
       - uses: actions/checkout@v4
       - name: Check and Initialize Conda
         run: |
-          # Check if conda is installed
           if ! command -v conda &> /dev/null; then
             echo "Conda is not installed. Please install Miniconda or Anaconda."
             exit 1
           fi
-  
-          # Check if conda is already initialized in the shell
+
           if ! grep -q "conda.sh" ~/.bashrc; then
             echo "Conda not initialized. Initializing now..."
             source ~/miniconda3/etc/profile.d/conda.sh
