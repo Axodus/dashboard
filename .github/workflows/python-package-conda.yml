@@ -57,12 +57,12 @@ jobs:
         run: |
           conda info
       - name: Activate Conda environment
-        shell: bash -l {0}
+        shell: bash
         run: |
           source $(dirname $(which conda))/../etc/profile.d/conda.sh
           conda activate dashboard || echo "Failed to activate environment, continuing anyway"
 
-run-dashboard:
+  run-dashboard:
     needs: activate-conda
     runs-on: ubuntu-20.04
     steps:
