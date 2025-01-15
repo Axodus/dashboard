@@ -72,18 +72,18 @@ jobs:
             echo "Conda is not installed. Please install Miniconda or Anaconda."
             exit 1
           fi
-
+      
           if ! grep -q "conda.sh" ~/.bashrc; then
             echo "Conda not initialized. Initializing now..."
-            source ~/miniconda3/etc/profile.d/conda.sh
             conda init bash
-            echo "Conda initialization added to .bashrc. Please restart your shell or run 'source ~/.bashrc' for changes to take effect."
+            echo "Conda initialization added to .bashrc. Please run 'source ~/.bashrc' for changes to take effect."
           else
             echo "Conda is already initialized."
           fi
+      
       - name: Restart bash
         run: source ~/.bashrc
-
+      
       - name: Activate Conda environment
         run: |
           conda activate dashboard
