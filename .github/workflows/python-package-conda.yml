@@ -67,7 +67,7 @@ jobs:
           conda activate dashboard || echo "Failed to activate environment, continuing anyway"
 
   run-dashboard:
-    needs: activate-conda
+    needs: [activate-conda, install-dependencies]
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
