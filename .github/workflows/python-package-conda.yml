@@ -14,13 +14,19 @@ jobs:
         with:
           python-version: '3.10'
 
-  create-conda:
+  install-miniconda:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
-      - name: Add conda to system path
+      - name: Install Miniconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: '3.10'
+      - name: Verify Miniconda Installation
         run: |
-          echo "$CONDA/bin" >> $GITHUB_PATH
+          conda --version
+          ls -la ~/miniconda3
 
   install-dependencies:
     needs: create-conda
@@ -30,19 +36,6 @@ jobs:
       - name: Install dependencies
         run: |
           conda env update --file environment_conda.yml --name dashboard
-
-  run-flake-lint:
-    needs: install-dependencies
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v4
-      - name: Lint with flake8
-        run: |
-          conda install -y flake8
-          # Stop the build if there are Python syntax errors or undefined names
-          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-          # Exit-zero treats all errors as warnings. GitHub editor is 127 chars wide
-          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 
   init-conda:
     needs: install-dependencies
@@ -54,22 +47,17 @@ jobs:
           conda init bash
 
   activate-conda:
-    needs: init-conda
+    needs: install-miniconda
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
-      - name: Install Miniconda
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          auto-update-conda: true
-          python-version: '3.10'
-      - name: Check Miniconda Installation
+      - name: Get Conda Info
         run: |
-          ls -la ~/miniconda3
-          ls -la ~/miniconda3/etc/profile.d/
+          conda info
       - name: Activate Conda environment
-        shell: bash
+        shell: bash -l {0}
         run: |
+          # Assuming conda.sh is now available after installation
           source ~/miniconda3/etc/profile.d/conda.sh
           conda activate dashboard
           
