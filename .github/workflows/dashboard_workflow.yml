@@ -4,10 +4,12 @@ on:
   push:
     branches:
       - develop
+    
 
 jobs:
   check-conda:
     runs-on: self-hosted
+    environment: development
     steps:
       - uses: actions/checkout@v4
       - name: Check if Conda is installed
@@ -101,4 +103,4 @@ jobs:
 
       - name: Run Streamlit Dashboard
         run: |
-          streamlit run main.py --server.headless true || echo "Streamlit execution failed with exit code $?"
+          bash -c "source ~/.bashrc && conda activate dashboard && streamlit run main.py --server.headless true"
