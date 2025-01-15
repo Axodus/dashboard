@@ -76,9 +76,11 @@ jobs:
           else
             echo "Conda is already initialized."
           fi
+      - name: Restaet bash
+        run: source ~/.bashrc
 
   activate-conda:
-    needs: [init-conda]
+    needs: init-conda
     runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
@@ -87,7 +89,7 @@ jobs:
           conda info
       - name: Activate Conda environment
         run: |
-          conda init && conda activate dashboard
+          conda activate dashboard
 
   run-dashboard:
     needs: [activate-conda, install]
