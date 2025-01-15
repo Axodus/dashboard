@@ -1,4 +1,4 @@
-name: Dashboard Conda
+name: DEV - Dashboard Conda
 
 on: 
   push:
@@ -6,6 +6,17 @@ on:
       - develop
 
 jobs:
+  environment:
+    runs-on: self-hosted
+    strategy:
+      max-parallel: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+
   check-conda:
     runs-on: self-hosted
     outputs:
