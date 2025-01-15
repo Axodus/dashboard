@@ -1,6 +1,9 @@
 name: Dashboard Conda
 
-on: [push]
+on: 
+  push:
+    branches:
+      - main
 
 jobs:
   build-linux:
@@ -57,7 +60,7 @@ jobs:
         run: |
           conda info
       - name: Activate Conda environment
-        shell: bash
+        shell: bash -l {0}
         run: |
           source $(dirname $(which conda))/../etc/profile.d/conda.sh
           conda activate dashboard || echo "Failed to activate environment, continuing anyway"
