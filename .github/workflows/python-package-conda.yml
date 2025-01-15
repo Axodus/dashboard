@@ -34,9 +34,8 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
-      - name: Install dependencies
-        run: |
-          conda env update --file environment_conda.yml --name dashboard
+      - name: Create Conda Environment
+        run: conda env create -f environment_conda.yml -n dashboard
       - name: List Conda Environments
         run: conda env list
 
@@ -63,23 +62,21 @@ jobs:
           source $(dirname $(which conda))/../etc/profile.d/conda.sh
           conda activate dashboard || echo "Failed to activate environment, continuing anyway"
 
-  run-dashboard:
+run-dashboard:
     needs: activate-conda
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
-      - name: Get Conda Info
-        run: conda info
-      - name: List Conda Environments
+      - name: Verify Environment Before Running
         run: conda env list
-      - name: Debug Conda Environment
+      - name: Check Conda Configuration
         run: |
-          echo "Conda environments:"
-          conda info --envs
-          echo "Current PATH:"
-          echo $PATH
+          conda config --show-sources
+          ls -la /usr/share/miniconda/envs
+      - name: Check Environment Directory Permissions
+        run: |
+          ls -la /usr/share/miniconda/envs
+          ls -la /usr/share/miniconda/envs/dashboard
       - name: Run Streamlit Dashboard
         run: |
-          # Assuming the correct path is in /usr/share/miniconda/envs/dashboard from `conda env list`
-          conda run -p /usr/share/miniconda/envs/dashboard streamlit run main.py --server.headless true || echo "Streamlit execution failed with exit code $?"
-          
+          conda run -n dashboard --no-capture-output streamlit run main.py --server.headless true || echo "Streamlit execution failed with exit code $?"
