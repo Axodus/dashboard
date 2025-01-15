@@ -86,6 +86,8 @@ jobs:
       
       - name: Activate Conda environment
         run: |
+          conda init
+          source ~/.bashrc
           conda activate dashboard
 
   run-dashboard:
