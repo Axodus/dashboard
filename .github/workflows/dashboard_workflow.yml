@@ -86,8 +86,9 @@ jobs:
       
       - name: Activate Conda environment
         run: |
-          conda init
-          source ~/.bashrc
+          conda init bash /
+          source ~/.bashrc /
+          source /home/mzfshark/miniconda3/etc/profile.d/conda.sh
           conda activate dashboard
 
   run-dashboard:
