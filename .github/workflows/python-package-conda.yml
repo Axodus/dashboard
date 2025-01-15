@@ -77,10 +77,6 @@ jobs:
         run: |
           conda config --show-sources
           ls -la /usr/share/miniconda/envs
-      - name: Check Environment Directory Permissions
-        run: |
-          ls -la /usr/share/miniconda/envs
-          ls -la /usr/share/miniconda/envs/dashboard
       - name: Run Streamlit Dashboard
         run: |
           conda run -n dashboard streamlit run main.py --server.headless true || echo "Streamlit execution failed with exit code $?"
