@@ -97,9 +97,27 @@ jobs:
     environment: Development
     steps:
       - uses: actions/checkout@v4
+  
+      - name: Verify and Initialize Conda
+        run: |
+          if ! conda info; then
+            # If Conda is not initialized, initialize it
+            conda init bash
+            source ~/.bashrc
+          fi
+  
+      - name: Activate Environment
+        run: |
+          # Check if the environment is active, if not activate it
+          if ! conda env list | grep -q "dashboard"; then
+            conda activate dashboard
+          else
+            echo "Dashboard environment already activated."
+          fi
+  
       - name: Verify Environment Before Running
         run: conda env list
-
+  
       - name: Run Streamlit Dashboard
         run: |
           streamlit run main.py --server.headless true
