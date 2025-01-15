@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-linux:
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
     strategy:
       max-parallel: 5
     steps:
@@ -18,7 +18,7 @@ jobs:
           python-version: '3.10'
 
   install-miniconda:
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - name: Install Miniconda
@@ -34,7 +34,7 @@ jobs:
 
   install-dependencies:
     needs: install-miniconda
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - name: Create or Update Conda Environment
@@ -45,7 +45,7 @@ jobs:
 
   init-conda:
     needs: install-dependencies
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - name: Initialize Conda
@@ -54,7 +54,7 @@ jobs:
 
   activate-conda:
     needs: [init-conda]
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - name: Get Conda Info
@@ -68,7 +68,7 @@ jobs:
 
   run-dashboard:
     needs: [activate-conda, install-dependencies]
-    runs-on: ubuntu-20.04
+    runs-on: self-hosted
     steps:
       - uses: actions/checkout@v4
       - name: Verify Environment Before Running
