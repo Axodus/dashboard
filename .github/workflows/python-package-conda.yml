@@ -48,7 +48,7 @@ jobs:
           conda init bash
 
   activate-conda:
-    needs: install-miniconda
+    needs: init-conda
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
@@ -58,7 +58,6 @@ jobs:
       - name: Activate Conda environment
         shell: bash -l {0}
         run: |
-          source $(dirname $(which conda))/../etc/profile.d/conda.sh
           conda activate dashboard
 
   run-dashboard:
