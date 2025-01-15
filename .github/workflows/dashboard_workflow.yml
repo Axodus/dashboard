@@ -73,7 +73,7 @@ jobs:
 
   conda-env:
     runs-on: self-hosted
-    needs: check-conda
+    needs: [check-conda, environment]
     if: needs.check-conda.outputs.conda_found == 'true'
     steps:
       - uses: actions/checkout@v4
@@ -128,6 +128,8 @@ jobs:
   
       - name: Verify Environment Before Running
         run: conda env list
+      - name: instal streamlit
+        run: pip install streamlit -y
   
       - name: Run Streamlit Dashboard
         run: |
