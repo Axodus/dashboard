@@ -6,22 +6,39 @@ on:
       - develop
 
 jobs:
-  chek-conda:
+  check-conda:
     runs-on: self-hosted
     steps:
-    - uses: actions/checkout@v4
-    - name: check if conda env installed
-      run: |
-        $(shell bash -c 'if [ "${CONDA_EXE} " == " " ]; then \
-            CONDA_EXE=$$((find /opt/conda/bin/conda || find ~/anaconda3/bin/conda || \
-            find /usr/local/anaconda3/bin/conda || find ~/miniconda3/bin/conda || \
-            find /root/miniconda/bin/conda || find ~/Anaconda3/Scripts/conda || \
-            find $$CONDA/bin/conda) 2>/dev/null); fi; \
-            if [ "${CONDA_EXE}_" == "_" ]; then \
-            echo "Please install Anaconda w/ Python 3.10+ first"; \
-            echo "See: https://www.anaconda.com/distribution/"; \
-            exit 1; fi; \
-            echo $$(dirname $${CONDA_EXE})')
+      - uses: actions/checkout@v4
+      - name: Check if Conda is installed
+        run: |
+          # Array of possible conda installation paths
+          CONDA_PATHS=(
+            "/opt/conda/bin/conda"
+            "~/anaconda3/bin/conda"
+            "/usr/local/anaconda3/bin/conda"
+            "~/miniconda3/bin/conda"
+            "/root/miniconda/bin/conda"
+            "~/Anaconda3/Scripts/conda"
+            "$CONDA/bin/conda"
+          )
+  
+          CONDA_EXE=""
+          for path in "${CONDA_PATHS[@]}"; do
+            if [ -x "$(eval echo $path)" ]; then
+              CONDA_EXE=$(eval echo $path)
+              break
+            fi
+          done
+  
+          if [ -z "$CONDA_EXE" ]; then
+            echo "Please install Anaconda or Miniconda with Python 3.10+ first."
+            echo "See: https://www.anaconda.com/distribution/"
+            exit 1
+          else
+            echo "Conda found at: $(dirname $CONDA_EXE)"
+          fi
+        shell: bash
   
   install:
     runs-on: self-hosted
