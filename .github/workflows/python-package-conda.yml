@@ -29,7 +29,7 @@ jobs:
           ls -la ~/miniconda3
 
   install-dependencies:
-    needs: create-conda
+    needs: install-miniconda
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
@@ -55,7 +55,7 @@ jobs:
         run: |
           conda info
       - name: Activate Conda environment
-        shell: bash -l {0}
+        shell: bash
         run: |
           # Assuming conda.sh is now available after installation
           source ~/miniconda3/etc/profile.d/conda.sh
