@@ -1,4 +1,4 @@
-name: Dashboard source
+name: Dashboard Conda
 
 on: [push]
 
@@ -7,65 +7,67 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       max-parallel: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
 
-    steps:
-    - uses: actions/checkout@v4
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: '3.10'
-  Create-conda:
+  create-conda:
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v4
-    - name: Add conda to system path
-      run: |
-        # $CONDA is an environment variable pointing to the root of the miniconda directory
-        echo $CONDA/bin >> $GITHUB_PATH
-  Dependences:
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v4
-    - name: Install dependencies
-      run: |
-        conda env update --file environment_conda.yml --name dashboard
-  Run-flake-lint:
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v4
-    - name: Lint with flake8
-      run: |
-        conda install flake8
-        # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
-        # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-  Init-conda:
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v4
-    - name: Init conda
-      run: |
-        conda init
-  Reboot-linux:
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v4
-    - name: Rebbot system
-      run: |
-        reboot
-  Activate-conda:
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v4
-    - name: Activate Conda env Dashboard
-      run: |
-        conda activate dashboard
-  Run-Dashboard:
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v4
-    - name: streamlit
-      run: |
-        streamlit run main.py --server.headless true
+      - uses: actions/checkout@v4
+      - name: Add conda to system path
+        run: |
+          echo "$CONDA/bin" >> $GITHUB_PATH
 
+  install-dependencies:
+    needs: create-conda
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: |
+          conda env update --file environment_conda.yml --name dashboard
+
+  run-flake-lint:
+    needs: install-dependencies
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint with flake8
+        run: |
+          conda install -y flake8
+          # Stop the build if there are Python syntax errors or undefined names
+          flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+          # Exit-zero treats all errors as warnings. GitHub editor is 127 chars wide
+          flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+  init-conda:
+    needs: install-dependencies
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Initialize Conda
+        run: |
+          conda init bash
+
+  activate-conda:
+    needs: init-conda
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Activate Conda environment
+        run: |
+          source ~/miniconda3/etc/profile.d/conda.sh
+          conda activate dashboard
+
+  run-dashboard:
+    needs: activate-conda
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run Streamlit Dashboard
+        run: |
+          streamlit run main.py --server.headless true
