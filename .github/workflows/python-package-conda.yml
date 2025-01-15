@@ -58,10 +58,21 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v4
+      - name: Install Miniconda
+        uses: conda-incubator/setup-miniconda@v2
+        with:
+          auto-update-conda: true
+          python-version: '3.10'
+      - name: Check Miniconda Installation
+        run: |
+          ls -la ~/miniconda3
+          ls -la ~/miniconda3/etc/profile.d/
       - name: Activate Conda environment
+        shell: bash
         run: |
           source ~/miniconda3/etc/profile.d/conda.sh
           conda activate dashboard
+          
 
   run-dashboard:
     needs: activate-conda
