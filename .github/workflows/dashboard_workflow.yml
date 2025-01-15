@@ -92,7 +92,7 @@ jobs:
           conda activate dashboard
 
   run-dashboard:
-    needs: [conda-env, install]
+    needs: [conda-env]
     runs-on: self-hosted
     environment: Development
     steps:
