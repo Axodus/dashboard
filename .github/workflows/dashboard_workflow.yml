@@ -127,7 +127,7 @@ jobs:
   
       - name: Install Streamlit
         run: |
-          python -m pip install streamlit
+          python3 -m pip install streamlit
         shell: /usr/bin/bash -e {0}
   
       - name: Verify Environment Before Running
