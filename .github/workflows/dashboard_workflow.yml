@@ -86,7 +86,6 @@ jobs:
         run: |
           conda info
       - name: Activate Conda environment
-        shell: bash
         run: |
           conda activate dashboard || echo "Failed to activate environment, continuing anyway"
 
