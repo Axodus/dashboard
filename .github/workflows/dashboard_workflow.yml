@@ -135,4 +135,4 @@ jobs:
   
       - name: Run Streamlit Dashboard
         run: |
-          streamlit run main.py --server.headless true
+          make run
