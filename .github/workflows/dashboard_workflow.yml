@@ -112,24 +112,30 @@ jobs:
       - name: Verify and Initialize Conda
         run: |
           if ! conda info; then
-            # If Conda is not initialized, initialize it
             conda init bash
             source ~/.bashrc
           fi
   
       - name: Activate Environment
         run: |
-          # Check if the environment is active, if not activate it
+          # Assuming you have a 'dashboard' environment
           if ! conda env list | grep -q "dashboard"; then
             conda activate dashboard
           else
             echo "Dashboard environment already activated."
           fi
   
+      - name: Ensure pip is Installed
+        run: |
+          conda install pip -y
+  
+      - name: Install Streamlit
+        run: |
+          pip install streamlit -y
+        shell: /usr/bin/bash -e {0}
+  
       - name: Verify Environment Before Running
         run: conda env list
-      - name: instal streamlit
-        run: pip install streamlit -y
   
       - name: Run Streamlit Dashboard
         run: |
