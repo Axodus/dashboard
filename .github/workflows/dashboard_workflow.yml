@@ -55,7 +55,7 @@ jobs:
           fi
         shell: bash
 
-  install:
+  conda-install:
     runs-on: self-hosted
     needs: check-conda
     if: needs.check-conda.outputs.conda_found == 'false'
@@ -99,7 +99,7 @@ jobs:
         run: |
           conda init bash
           source ~/.bashrc
-          source /home/mzfshark/miniconda3/etc/profile.d/conda.sh
+          source ~/miniconda3/etc/profile.d/conda.sh
           conda activate dashboard
 
   run-dashboard:
@@ -109,29 +109,25 @@ jobs:
     steps:
       - uses: actions/checkout@v4
   
-      - name: Verify and Initialize Conda
+      - name: Check Python Installation
         run: |
-          if ! conda info; then
-            conda init bash
-            source ~/.bashrc
+          python --version || echo "Python not found in PATH"
+  
+      - name: Install Python if not present
+        run: |
+          if ! command -v python &> /dev/null; then
+            sudo apt-get update && sudo apt-get install -y python3 python3-pip
           fi
   
-      - name: Activate Environment
+      - name: Ensure pip is in PATH
         run: |
-          # Assuming you have a 'dashboard' environment
-          if ! conda env list | grep -q "dashboard"; then
-            conda activate dashboard
-          else
-            echo "Dashboard environment already activated."
+          if ! command -v pip &> /dev/null; then
+            python -m ensurepip --upgrade
           fi
-  
-      - name: Ensure pip is Installed
-        run: |
-          conda install pip -y
   
       - name: Install Streamlit
         run: |
-          pip install streamlit -y
+          python -m pip install streamlit -y
         shell: /usr/bin/bash -e {0}
   
       - name: Verify Environment Before Running
