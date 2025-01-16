@@ -16,7 +16,22 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: '3.10'
-
+      - name: Check Python Installation
+        run: |
+          python3 --version || echo "Python not found in PATH"
+      
+      - name: Install Python if not present
+        run: |
+          if ! command -v python3 &> /dev/null; then
+            apt-get update && apt-get install -y python3 python3-pip
+          fi
+      
+      - name: Ensure pip is in PATH for Python3
+        run: |
+          if ! command -v pip3 &> /dev/null; then
+            python3 -m ensurepip --upgrade
+          fi
+          
   check-conda:
     runs-on: self-hosted
     outputs:
@@ -107,32 +122,16 @@ jobs:
     runs-on: self-hosted
     environment: Development
     steps:
-      - uses: actions/checkout@v4
-  
-      - name: Check Python Installation
-        run: |
-          python3 --version || echo "Python not found in PATH"
+      - uses: actions/checkout@v4  
+      - name: Install dependencies
+        run: pip install streamlit
       
-      - name: Install Python if not present
+      - name: Deploy code
+        env:
+          SERVER_IP: localhost
+          PORT: 8501
         run: |
-          if ! command -v python3 &> /dev/null; then
-            apt-get update && apt-get install -y python3 python3-pip
-          fi
-      
-      - name: Ensure pip is in PATH for Python3
+          streamlit run https://github.com/Axodus/dashboard/blob/ee8962a26d22c73d7a74141903695ec79489d5f7/main.py --server.address localhost  --server.port 8501
+      - name: start local server
         run: |
-          if ! command -v pip3 &> /dev/null; then
-            python3 -m ensurepip --upgrade
-          fi
-  
-      - name: Install Streamlit
-        run: |
-          python3 -m pip install streamlit
-        shell: /usr/bin/bash -e {0}
-  
-      - name: Verify streamlit Before Running
-        run: streamlit version
-  
-      - name: Run Streamlit Dashboard
-        run: |
-          make run
+          python -m http.server 8501
