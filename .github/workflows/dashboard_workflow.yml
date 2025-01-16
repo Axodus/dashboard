@@ -130,8 +130,8 @@ jobs:
           python3 -m pip install streamlit
         shell: /usr/bin/bash -e {0}
   
-      - name: Verify Environment Before Running
-        run: conda env list
+      - name: Verify streamlit Before Running
+        run: streamlit version
   
       - name: Run Streamlit Dashboard
         run: |
